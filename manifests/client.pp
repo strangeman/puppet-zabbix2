@@ -102,7 +102,8 @@ class zabbix2::client(
   if $pid_file == false {
     case $::lsbdistid {
       'debian': {
-        $conf_pid_file = '/var/run/zabbix-agent/zabbix_agentd.pid'
+#        $conf_pid_file = '/var/run/zabbix-agent/zabbix_agentd.pid'
+        $conf_pid_file = '/var/run/zabbix/zabbix_agentd.pid'
       }
       'ubuntu': {
         $conf_pid_file = '/var/run/zabbix/zabbix_agentd.pid'
