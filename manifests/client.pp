@@ -141,7 +141,7 @@ class zabbix2::client(
   }
 
   file {'/etc/zabbix/zabbix_agentd.conf':
-    content => template('zabbix/zabbix_agentd.conf.erb'),
+    content => template('zabbix2/zabbix_agentd.conf.erb'),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
