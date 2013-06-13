@@ -154,5 +154,5 @@ class zabbix2::client(
     hasstatus  => true,
   }
 
-  Package['zabbix-agent']->File['/etc/zabbix/zabbix_agentd.conf']~>Service['zabbix-agent']
+  File['/etc/zabbix/zabbix_agentd.conf']->Package['zabbix-agent']~>Service['zabbix-agent']
 }
