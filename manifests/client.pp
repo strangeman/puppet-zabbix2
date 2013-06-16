@@ -155,13 +155,5 @@ class zabbix2::client(
     hasstatus  => true,
   }
 
-  cron { 'restart_zabbix2':
-    command  => "killall zabbix_agentd ; /etc/init.d/zabbix-agent stop ; /etc/init.d/zabbix-agent start",
-    user     => root,
-    hour     => '12',
-    minute   => '0'
-    }
-  }
-
   File['/etc/zabbix/zabbix_agentd.conf']->Package['zabbix-agent']~>Service['zabbix-agent']
 }
