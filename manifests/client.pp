@@ -147,6 +147,11 @@ class zabbix2::client(
     group   => 'root',
     mode    => '0644',
   }
+  
+  #remove zabbix_agent.conf from 1.* zabbix
+  file {'/etc/zabbix/zabbix_agent.conf':
+    ensure => absent,
+  }
 
   service {'zabbix-agent':
     ensure     => running,
@@ -155,5 +160,6 @@ class zabbix2::client(
     hasstatus  => true,
   }
 
+  File['/etc/zabbix/zabbix_agentd.conf']~>Service['zabbix-agent']
   File['/etc/zabbix/zabbix_agentd.conf']->Package['zabbix-agent']~>Service['zabbix-agent']
 }
