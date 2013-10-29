@@ -1,6 +1,6 @@
 # == Class: zabbix2::repo
 #
-# Данный класс предоставляет настройку репозиториев zabbix 2 для debian 6 и ubuntu 12.04
+# Данный класс предоставляет настройку репозиториев zabbix 2 для debian 6/7 и ubuntu 12.04
 #
 # === Authors
 # Anton Markelov <doublic@gmail.com> <markelovaa@dalstrazh.ru>
