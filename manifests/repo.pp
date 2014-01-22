@@ -12,8 +12,8 @@ class zabbix2::repo{
       case $::lsbmajdistrelease {
         '6':{
           $need_repo = true
-          $repo_location = "http://repo.zabbixzone.com/debian"
-          $repo_key = "25FFD7E7"
+          $repo_location = "http://repo.zabbix.com/zabbix/2.0/debian/"
+          $repo_key = "79EA5ED4"
           $repo_key_server = "keys.gnupg.net"
         }
         '7':{
@@ -23,8 +23,8 @@ class zabbix2::repo{
     }
     'ubuntu': {
       $need_repo = true
-      $repo_location = "http://ppa.launchpad.net/tbfr/zabbix/ubuntu"
-      $repo_key = "5F76A32B"
+      $repo_location = "http://repo.zabbix.com/zabbix/2.0/ubuntu/"
+      $repo_key = "79EA5ED4"
       $repo_key_server = "keys.gnupg.net"
     }
     default: {
@@ -35,7 +35,7 @@ class zabbix2::repo{
   if $need_repo == true {
     apt::key { "zabbix2":
             key         => $repo_key,
-            key_options => "http-proxy=\"http://markelovaa:123456789@192.168.0.232:3128\"",
+#            key_options => "http-proxy=\"http://markelovaa:123456789@192.168.0.232:3128\"",
             key_server  => $repo_key_server,
     }
 
