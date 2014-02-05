@@ -65,7 +65,7 @@
 # Anton Markelov <doublic@gmail.com> <markelovaa@dalstrazh.ru>
 #
 class zabbix2::client(
-  $zabbix_server          = 'zabbix.localnet',
+  $zabbix_server          = 'zabbix',
   $zabbix_server_active   = false,
   $hostname               = false,
   $listen_port            = '10050',
