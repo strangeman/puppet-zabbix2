@@ -1,0 +1,53 @@
+##
+### Managed by Puppet
+### Template zabbix2/zabbix_agentd.conf.erb
+### Class zabbix2::client
+##
+
+# This is a config file for the Zabbix agent daemon (Unix)
+# To get more information about Zabbix, visit http://www.zabbix.com
+
+
+############ REQUIED PARAMETERS #################
+Server=<%= @zabbix_server %>
+ServerActive=<%= @zabbix_server_active_name %>
+Hostname= <%= @hostname %>
+LogFile= <%= @conf_log_file %>
+
+
+############ GENERAL PARAMETERS #################
+LogFileSize=<%= @log_file_size %>
+DebugLevel=<%= @debug_level %>
+EnableRemoteCommands=<%= @enable_remote_commands %>
+LogRemoteCommands=<%= @log_remote_commands %>
+
+##### Passive checks related
+ListenPort=<%= @listen_port %>
+<%- if @listen_ip then -%>
+ListenIP=<%= @listen_ip %>
+<%- end -%>
+StartAgents=<%= @start_agents %>
+
+##### Active checks related
+RefreshActiveChecks=<%= @refresh_active_checks %>
+BufferSend=<%= @buffer_send %>
+BufferSize=<%= @buffer_size %>
+MaxLinesPerSecond=<%= @max_lines_per_second %>
+
+
+############ ADVANCED PARAMETERS #################
+Timeout=<%= @time_out %>
+<%- if @include_dirs then -%>
+<% @include_dirs.each do |include_dir| -%>
+Include=<%= include_dir %>
+<% end -%>
+<%- end -%>
+
+
+####### USER-DEFINED MONITORED PARAMETERS #######
+UnsafeUserParameters=<%= @unsafe_user_parameters %>
+<%- if @user_parameters then -%>
+<% @user_parameters.each do |parameter| -%>
+UserParameter=<%= parameter %>
+<% end -%>
+<%- end -%>
