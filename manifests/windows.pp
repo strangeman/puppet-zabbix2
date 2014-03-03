@@ -46,24 +46,24 @@ class zabbix2::windows (
 
   #install zabbix
   #[server=ZabbixServerIPAddress][lport=ListenPort] [serveractive=List IP:Port] [rmtcmd=1] [/qn]
-  package{'Zabbix Agent':
-    ensure => installed,
-    source => 'c:/distrib/zabbix/zabbix_agent_x86.msi',
-    install_options => ['server=zabbix', 'lport=10050', 'serveractive=zabbix:10051', 'rmtcmd=1', '/qn']
-  }
+  # package{'Zabbix Agent':
+  #   ensure => installed,
+  #   source => 'c:/distrib/zabbix/zabbix_agent_x86.msi',
+  #   install_options => ['server=zabbix', 'lport=10050', 'serveractive=zabbix:10051', 'rmtcmd=1', '/qn']
+  # }
 
-  file {'C:/Program Files/Zabbix Agent':
+  file {'C:/Program Files/Zabbix Agent/zabbix_agentd.conf':
     content => template('zabbix2/zabbix_agentd_win.conf.erb'),
     ensure  => 'file',
     source_permissions => ignore,
   }
   
-  service {'Zabbix Agent':
-    ensure     => running,
-    enable     => true,
-  }
+  # service {'Zabbix Agent':
+  #   ensure     => running,
+  #   enable     => true,
+  # }
 
-  File['C:/Program Files/Zabbix Agent']~>Service['Zabbix Agent']
-  File['C:/Program Files/Zabbix Agent']->Package['Zabbix Agent']~>Service['Zabbix Agent']
+  # File['C:/Program Files/Zabbix Agent']~>Service['Zabbix Agent']
+  # File['C:/Program Files/Zabbix Agent']->Package['Zabbix Agent']~>Service['Zabbix Agent']
 
 }
