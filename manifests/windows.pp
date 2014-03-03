@@ -48,6 +48,7 @@ class zabbix2::windows (
   package{'Zabbix Agent':
     ensure => installed,
     source => 'c:/distrib/zabbix/zabbix_agent_x86.msi',
+    source_permissions => ignore,
     install_options => ['server=zabbix', 'lport=10050', 'serveractive=zabbix:10051', 'rmtcmd=1', '/qn']
   }
 
