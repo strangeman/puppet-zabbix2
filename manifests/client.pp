@@ -62,7 +62,7 @@
 #                       'softraid.status,egrep \"\\[.*_.*\\]\" /proc/mdstat|wc -l']
 #  }
 # === Authors
-# Anton Markelov <doublic@gmail.com> <markelovaa@dalstrazh.ru>
+# Anton Markelov <doublic@gmail.com> <markelov@kms.solnce.ru>
 #
 class zabbix2::client(
   $zabbix_server          = 'zabbix',
