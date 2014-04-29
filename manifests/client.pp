@@ -161,5 +161,5 @@ class zabbix2::client(
   }
 
   File['/etc/zabbix/zabbix_agentd.conf']~>Service['zabbix-agent']
-  File['/etc/zabbix/zabbix_agentd.conf']->Package['zabbix-agent']~>Service['zabbix-agent']
+  Package['zabbix-agent']->File['/etc/zabbix/zabbix_agentd.conf']~>Service['zabbix-agent']
 }
