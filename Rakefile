@@ -10,6 +10,7 @@ end
 PuppetLint.configuration.ignore_paths = ["spec/**/*.pp", "pkg/**/*.pp"]
 PuppetLint.configuration.send('disable_80chars')
 
+desc "Run lint."
 task :test => [:lint]
 
 task :default => :test
