@@ -3,7 +3,7 @@
 # Данный класс предоставляет настройку репозиториев zabbix 2 для debian 6/7 и ubuntu 12.04
 #
 # === Authors
-# Anton Markelov <doublic@gmail.com> <markelovaa@dalstrazh.ru>
+# Anton Markelov <doublic@gmail.com> <markelov@kms.solnce.ru>
 #
 class zabbix2::repo{
   #add repo and key
