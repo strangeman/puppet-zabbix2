@@ -36,6 +36,7 @@ class zabbix2::windows (
 
   file { 'c:/distrib/zabbix':
     ensure => 'directory',
+    source_permissions => ignore,
   }
 
   #http://www.suiviperf.com/zabbix/index.php
@@ -45,7 +46,7 @@ class zabbix2::windows (
     source_permissions => ignore,
   }
 
-  install zabbix
+  #install zabbix
   #[server=ZabbixServerIPAddress][lport=ListenPort]
   #[serveractive=List IP:Port] [rmtcmd=1] [/qn]
   package{'Zabbix Agent':
