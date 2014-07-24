@@ -68,10 +68,10 @@ class zabbix2::windows (
     enable     => true,
   }
 
-  File['C:/Program Files/Zabbix Agent']~>
+  File['C:/Program Files/Zabbix Agent/zabbix_agentd.conf']~>
   Service['Zabbix Agent']
   
-  File['C:/Program Files/Zabbix Agent']->
+  File['C:/Program Files/Zabbix Agent/zabbix_agentd.conf']->
   Package['Zabbix Agent']~>
   Service['Zabbix Agent']
 
