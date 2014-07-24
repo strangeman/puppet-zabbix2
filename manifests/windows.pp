@@ -50,7 +50,7 @@ class zabbix2::windows (
   #[server=ZabbixServerIPAddress][lport=ListenPort]
   #[serveractive=List IP:Port] [rmtcmd=1] [/qn]
   package{'Zabbix Agent':
-    ensure => latest,
+    ensure => '2.2.3',
     source => 'c:/distrib/zabbix/zabbix_agent_x86.msi',
     install_options => ['server=zabbix',
                         'lport=10050', 'serveractive=zabbix:10051',
