@@ -13,7 +13,7 @@ class zabbix2::repo (
 
   $repo_key = '79EA5ED4'
   $repo_key_server = 'keys.gnupg.net'
-  $repo_location = "http://repo.zabbix.com/zabbix/'${version}'/'${::lsbdistid}'/"
+  $repo_location = "http://repo.zabbix.com/zabbix/${version}/${::lsbdistid}/"
 
   if $need_repo == true {
     apt::key { 'zabbix2':
