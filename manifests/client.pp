@@ -98,7 +98,8 @@ class zabbix2::client(
   $time_out               = 3,
   $unsafe_user_parameters = 0,
   $user_parameters        = false,
-  $include_dirs           = false
+  $include_dirs           = false,
+  $version                = '2.2',
   ) {
 
   if $hostname == false {
@@ -147,11 +148,13 @@ class zabbix2::client(
     $conf_log_file = $log_file
   }
 
-  require zabbix2::repo
+  class {'zabbix2::repo':
+    version => $version,
+  }
 
   #install zabbix
   package{'zabbix-agent':
-    ensure => latest,
+    ensure => latest
   }
 
   file {'/etc/zabbix/zabbix_agentd.conf':
@@ -176,6 +179,7 @@ class zabbix2::client(
   File['/etc/zabbix/zabbix_agentd.conf']~>
   Service['zabbix-agent']
 
+  Class['zabbix2::repo']->
   Package['zabbix-agent']->
   File['/etc/zabbix/zabbix_agentd.conf']~>
   Service['zabbix-agent']
