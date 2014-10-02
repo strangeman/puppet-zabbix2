@@ -99,7 +99,7 @@ class zabbix2::client(
   $unsafe_user_parameters = 0,
   $user_parameters        = false,
   $include_dirs           = false,
-  $version                = '2.2',
+  $version                = 'latest',
   ) {
 
   if $hostname == false {
