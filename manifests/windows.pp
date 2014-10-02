@@ -20,7 +20,8 @@ class zabbix2::windows (
   $time_out               = 3,
   $unsafe_user_parameters = 0,
   $user_parameters        = false,
-  $include_dirs           = false
+  $include_dirs           = false,
+  $version                = '2.4.0.0'
   ) {
 
   if $hostname == false {
@@ -40,18 +41,19 @@ class zabbix2::windows (
   }
 
   #http://www.suiviperf.com/zabbix/index.php
-  file { 'c:/distrib/zabbix/zabbix_agent_x86.msi':
+  file { 'c:/distrib/zabbix/zabbix_agent.msi':
     ensure             => 'file',
-    source             => 'puppet:///modules/zabbix2/zabbix_agent_x86.msi',
+    source             => 'puppet:///modules/zabbix2/zabbix_agent_${::architecture}_${version}.msi',
     source_permissions => ignore,
-  }
+  }  
 
   # #install zabbix
   # #[server=ZabbixServerIPAddress][lport=ListenPort]
   # #[serveractive=List IP:Port] [rmtcmd=1] [/qn]
   package{'Zabbix Agent':
-    ensure => '2.2.3.0',
-    source => 'c:/distrib/zabbix/zabbix_agent_x86.msi',
+    ensure => $version,
+    source => 'c:/distrib/zabbix/zabbix_agent.msi',
+    #usually not needed, because we change config file after install
     install_options => ['server=zabbix',
                         'lport=10050', 'serveractive=zabbix:10051',
                         'rmtcmd=1', '/qn']
