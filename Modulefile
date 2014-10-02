@@ -1,5 +1,5 @@
 name    'strangeman-zabbix2'
-version '0.0.7-b2'
+version '0.0.7'
 source  ''
 author  'Markelov Anton'
 license 'Apache License 2.0'

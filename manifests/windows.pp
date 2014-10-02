@@ -1,6 +1,8 @@
 # Class: zabbix2::windows
 #
 #
+#перечисляем основные параметры модуля. большинство из них потом 
+#подставится в конфигурационный файл
 class zabbix2::windows (
   $zabbix_server          = 'zabbix',
   $zabbix_server_active   = false,
@@ -24,6 +26,7 @@ class zabbix2::windows (
   $version                = '2.4.0.0'
   ) {
 
+  #проверяем заполнение обязательного параметра и формируем недостающие
   if $hostname == false {
     fail('Module zabbix2: hostname parameter required!')
   }
@@ -35,19 +38,23 @@ class zabbix2::windows (
     $zabbix_server_active_name = $zabbix_server_active
   }
 
+  #создаем папку на сервере, в которую положим дистрибутив
   file { 'c:/distrib/zabbix':
     ensure => 'directory',
     source_permissions => ignore,
   }
 
   #http://www.suiviperf.com/zabbix/index.php
+  #кладем в эту папку собственно дистрибутив нужной версии и архитектуры
   file { 'c:/distrib/zabbix/zabbix_agent.msi':
     ensure             => 'file',
     source             => "puppet:///modules/zabbix2/zabbix_agent_${::architecture}_${version}.msi",
     source_permissions => ignore,
   }  
 
-  # #install zabbix
+  #устанавливаем zabbix из msi-пакета, подставляя опции
+  #(которые, правда, нам все равно не нужны, т.к. мы будем потом
+  # редактировать конфиг как нам надо)
   # #[server=ZabbixServerIPAddress][lport=ListenPort]
   # #[serveractive=List IP:Port] [rmtcmd=1] [/qn]
   package{'Zabbix Agent':
@@ -59,22 +66,28 @@ class zabbix2::windows (
                         'rmtcmd=1', '/qn']
   }
 
+  #создаем конфиг из шаблона 
   file {'C:/Program Files/Zabbix Agent/zabbix_agentd.conf':
     ensure             => 'file',
     content            => template('zabbix2/zabbix_agentd_win.conf.erb'),
     source_permissions => ignore,
   }
 
+  #запускаем службу
   service {'Zabbix Agent':
     ensure     => running,
     enable     => true,
   }
 
+  #настраиваем зависимости
+
+  #любое изменение конфига должно вызывать рестарт сервиса
   File['C:/Program Files/Zabbix Agent/zabbix_agentd.conf']~>
   Service['Zabbix Agent']
   
-  File['C:/Program Files/Zabbix Agent/zabbix_agentd.conf']->
-  Package['Zabbix Agent']~>
-  Service['Zabbix Agent']
+  #сначала ставим пакет, а потом только редактируем конфиг
+  #чтобы он не затерся версией из пакета
+  Package['Zabbix Agent']->
+  File['C:/Program Files/Zabbix Agent/zabbix_agentd.conf']
 
 }
