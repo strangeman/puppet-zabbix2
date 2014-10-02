@@ -43,7 +43,7 @@ class zabbix2::windows (
   #http://www.suiviperf.com/zabbix/index.php
   file { 'c:/distrib/zabbix/zabbix_agent.msi':
     ensure             => 'file',
-    source             => 'puppet:///modules/zabbix2/zabbix_agent_${::architecture}_${version}.msi',
+    source             => "puppet:///modules/zabbix2/zabbix_agent_${::architecture}_${version}.msi",
     source_permissions => ignore,
   }  
 
