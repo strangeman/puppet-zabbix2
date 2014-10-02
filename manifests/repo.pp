@@ -21,14 +21,14 @@ class zabbix2::repo (
     case $::lsbdistid {
       'debian': {
         case $::lsbmajdistrelease {
-          '7': $repo_version = '2.4'
-          default: $repo_version = '2.2'
+          '7': {$repo_version = '2.4'}
+          default: {$repo_version = '2.2'}
         }
       }
       'ubuntu': {
         case $::lsbmajdistrelease {
-          '14.04': $repo_version = '2.4'
-          default: $repo_version = '2.2'
+          '14.04': {$repo_version = '2.4'}
+          default: {$repo_version = '2.2'}
         }
       }
       default: {
